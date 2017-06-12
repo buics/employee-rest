@@ -15,21 +15,34 @@ if [ $? -ne 0 ]; then
 fi
 eval "$exp"
 
-echo -e "Downloading guestbook yml"
-curl --silent "https://raw.githubusercontent.com/kubernetes/kubernetes/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml" > guestbook.yml
+echo -e "build docker image"
+docker build -t registry.ng.bluemix.net/ozimage/employee-rest:1 .
+
+echo -e "push docker image"
+docker push registry.ng.bluemix.net/ozimage/employee-rest:1
+
+echo -e "run deployment"
+kubectl run employee-rest-deployment --image=registry.ng.bluemix.net/ozimage/employee-rest:1
+
+echo -e "expose service"
+kubectl expose deployment/employee-rest-deployment --type=NodePort --port=8080 --name=employee-rest-deployment-service
+
+#echo -e "Downloading guestbook yml"
+#curl --silent "https://raw.githubusercontent.com/kubernetes/kubernetes/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml" > guestbook.yml
 
 #Find the line that has the comment about the load balancer and add the nodeport def after this
-let NU=$(awk '/^  # type: LoadBalancer/{ print NR; exit }' guestbook.yml)+3
-NU=$NU\i
-sed -i "$NU\ \ type: NodePort" guestbook.yml #For OSX: brew install gnu-sed; replace sed references with gsed
+#let NU=$(awk '/^  # type: LoadBalancer/{ print NR; exit }' guestbook.yml)+3
+#NU=$NU\i
+#sed -i "$NU\ \ type: NodePort" guestbook.yml #For OSX: brew install gnu-sed; replace sed references with gsed
 
-echo -e "Deleting previous version of guestbook if it exists"
-kubectl delete --ignore-not-found=true   -f guestbook.yml
+#echo -e "Deleting previous version of guestbook if it exists"
+#kubectl delete --ignore-not-found=true   -f guestbook.yml
+kubectl delete pods --all
 
-echo -e "Creating pods"
-kubectl create -f guestbook.yml
+#echo -e "Creating pods"
+#kubectl create -f guestbook.yml
 
-PORT=$(kubectl get services | grep frontend | sed 's/.*:\([0-9]*\).*/\1/g')
+PORT=$(kubectl get services | grep employee-rest | sed 's/.*:\([0-9]*\).*/\1/g')
 
 echo ""
-echo "View the guestbook at http://$IP_ADDR:$PORT"
+echo "View the employee-rest at http://$IP_ADDR:$PORT"
