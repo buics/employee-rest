@@ -11,8 +11,17 @@ public class Employee {
 	String name;
 	String position;
 	String department;
+	String dateHire;
+	
 	List<Training> trainings;
 	
+	
+	public String getDateHire() {
+		return dateHire;
+	}
+	public void setDateHire(String dateHire) {
+		this.dateHire = dateHire;
+	}
 	public String getId() {
 		return id;
 	}
