@@ -15,12 +15,6 @@ if [ $? -ne 0 ]; then
 fi
 eval "$exp"
 
-echo -e "build docker"
-docker build -t registry.ng.bluemix.net/ozimage/employee-rest:1 .
-
-echo -e "push docker"
-docker push registry.ng.bluemix.net/ozimage/employee-rest:1
-
 
 #echo -e "Downloading guestbook yml"
 #curl --silent "https://raw.githubusercontent.com/kubernetes/kubernetes/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml" > guestbook.yml
