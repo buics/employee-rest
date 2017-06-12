@@ -17,7 +17,7 @@ bx plugin install container-service -r Bluemix
 chmod +x /tmp/Bluemix_CLI/bin/*
 
 echo "Install kubectl"
-wget --quiet --output-document=/tmp/Bluemix_CLI/bin/kubectl  https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+wget --quiet --output-document=/tmp/Bluemix_CLI/bin/  https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 chmod +x /tmp/Bluemix_CLI/bin/kubectl
 
 if [ -n "$DEBUG" ]; then
