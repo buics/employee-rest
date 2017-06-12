@@ -1,0 +1,56 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: 2017-06-12T01:23:57Z
+  generation: 1
+  labels:
+    run: employee-rest-deployment
+  name: employee-rest-deployment
+  namespace: default
+  resourceVersion: "61700"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/employee-rest-deployment
+  uid: ce5e0639-4f0d-11e7-9615-7a8ad8df4286
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: employee-rest-deployment
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: employee-rest-deployment
+    spec:
+      containers:
+      - image: registry.ng.bluemix.net/ozimage/employee-rest:1
+        imagePullPolicy: IfNotPresent
+        name: employee-rest-deployment
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2017-06-12T01:23:57Z
+    lastUpdateTime: 2017-06-12T01:23:57Z
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  replicas: 1
+  updatedReplicas: 1

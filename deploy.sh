@@ -15,17 +15,12 @@ if [ $? -ne 0 ]; then
 fi
 eval "$exp"
 
-echo -e "build docker image"
+echo -e "build docker"
 docker build -t registry.ng.bluemix.net/ozimage/employee-rest:1 .
 
-echo -e "push docker image"
+echo -e "push docker"
 docker push registry.ng.bluemix.net/ozimage/employee-rest:1
 
-echo -e "run deployment"
-kubectl run employee-rest-deployment --image=registry.ng.bluemix.net/ozimage/employee-rest:1
-
-echo -e "expose service"
-kubectl expose deployment/employee-rest-deployment --type=NodePort --port=8080 --name=employee-rest-deployment-service
 
 #echo -e "Downloading guestbook yml"
 #curl --silent "https://raw.githubusercontent.com/kubernetes/kubernetes/master/examples/guestbook/all-in-one/guestbook-all-in-one.yaml" > guestbook.yml
@@ -35,12 +30,12 @@ kubectl expose deployment/employee-rest-deployment --type=NodePort --port=8080 -
 #NU=$NU\i
 #sed -i "$NU\ \ type: NodePort" guestbook.yml #For OSX: brew install gnu-sed; replace sed references with gsed
 
-#echo -e "Deleting previous version of guestbook if it exists"
-#kubectl delete --ignore-not-found=true   -f guestbook.yml
-kubectl delete pods --all
+echo -e "Deleting previous version of employee-rest if it exists"
+kubectl delete --ignore-not-found=true   -f deployment.yaml
+
 
 #echo -e "Creating pods"
-#kubectl create -f guestbook.yml
+kubectl create -f deployment.yaml
 
 PORT=$(kubectl get services | grep employee-rest | sed 's/.*:\([0-9]*\).*/\1/g')
 
