@@ -21,9 +21,13 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "bx cr login"
+bx cr login
+
 # Init container clusters
 echo "bx cs init"
 bx cs init
+
 if [ $? -ne 0 ]; then
   echo "Failed to initialize to Bluemix Container Service"
   exit 1
