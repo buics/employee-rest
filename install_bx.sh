@@ -18,11 +18,7 @@ chmod +x /tmp/Bluemix_CLI/bin/*
 
 echo "Install kubectl"
 wget --quiet --output-document=/tmp/Bluemix_CLI/bin/kubectl  https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-ls -ltr /tmp/Bluemix_CLI/bin/
 chmod +x /tmp/Bluemix_CLI/bin/kubectl
-ls -ltr /tmp/Bluemix_CLI/bin/
-
-ls -ltr
 
 if [ -n "$DEBUG" ]; then
   bx --version
