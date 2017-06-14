@@ -24,12 +24,13 @@ eval "$exp"
 #NU=$NU\i
 #sed -i "$NU\ \ type: NodePort" guestbook.yml #For OSX: brew install gnu-sed; replace sed references with gsed
 
-echo -e "Deleting previous version of employee-rest if it exists"
-kubectl delete --ignore-not-found=true   -f deployment.yaml
-
-
+#echo -e "Deleting previous version of employee-rest if it exists"
+#kubectl delete --ignore-not-found=true   -f deployment.yaml
 #echo -e "Creating pods"
-kubectl create -f deployment.yaml
+#kubectl create -f deployment.yaml
+
+echo -e "update image with $IMAGE_NAME"
+kubectl set image deployment/employee-rest-deployment employee-rest-deployment=$IMAGE_NAME
 
 PORT=$(kubectl get services | grep employee-rest | sed 's/.*:\([0-9]*\).*/\1/g')
 
