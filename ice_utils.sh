@@ -78,6 +78,7 @@ install_cf_ic() {
         log_and_echo "$ERROR" "Installing IBM Containers plug-in (cf ic) failed with return code ${RESULT}"
         #${EXT_DIR}/print_help.sh
         #${EXT_DIR}/utilities/sendMessage.sh -l bad -m "Failed to install IBM Containers plug-in (cf ic). $(get_error_info)"
+        echo "Failed to install IBM Containers plug-in (cf ic). $(get_error_info)"
         exit $RESULT
         return 1
     fi
@@ -90,6 +91,7 @@ install_cf_ic() {
         log_and_echo "$ERROR" "Additional message was \"$(cat iceretry.log)\""
         #${EXT_DIR}/print_help.sh
        # ${EXT_DIR}/utilities/sendMessage.sh -l bad -m "Failed to test cf ic integration. $(get_error_info)"
+       echo "Failed to test cf ic integration. $(get_error_info)"
         exit $RESULT
         return 2
     else
@@ -499,6 +501,7 @@ login_to_container_service(){
         if [ "$USE_ICE_CLI" = "1" ]; then
             #${EXT_DIR}/print_help.sh
             #${EXT_DIR}/utilities/sendMessage.sh -l bad -m "Failed to login to IBM Container Service CLI. $(get_error_info)"
+            echo "Failed to login to IBM Container Service CLI. $(get_error_info)"
         fi
     else 
         echo -e "${green}Successfully accessed into IBM Containers Service${no_color}"
@@ -521,6 +524,7 @@ get_name_space() {
             printEnablementInfo
             #${EXT_DIR}/print_help.sh
             #${EXT_DIR}/utilities/sendMessage.sh -l bad -m "Failed to discover namespace. $(get_error_info)"
+            echo "Failed to discover namespace. $(get_error_info)"
             RC=1
         else
             export NAMESPACE=$NAMESPACE
@@ -530,6 +534,7 @@ get_name_space() {
         printEnablementInfo
         #${EXT_DIR}/print_help.sh    
         #${EXT_DIR}/utilities/sendMessage.sh -l bad -m "Failed to get namespace. $(get_error_info)"
+        echo "Failed to get namespace. $(get_error_info)"
     fi 
     return $RC
 }
