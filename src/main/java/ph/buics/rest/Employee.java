@@ -12,10 +12,17 @@ public class Employee {
 	String position;
 	String department;
 	String dateHire;
+	String project;
 	
 	List<Training> trainings;
 	
 	
+	public String getProject() {
+		return project;
+	}
+	public void setProject(String project) {
+		this.project = project;
+	}
 	public String getDateHire() {
 		return dateHire;
 	}
