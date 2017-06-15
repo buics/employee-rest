@@ -13,10 +13,17 @@ public class Employee {
 	String department;
 	String dateHire;
 	String project;
+	String manager;
 	
 	List<Training> trainings;
 	
 	
+	public String getManager() {
+		return manager;
+	}
+	public void setManager(String manager) {
+		this.manager = manager;
+	}
 	public String getProject() {
 		return project;
 	}
