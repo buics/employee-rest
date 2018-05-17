@@ -1,9 +1,13 @@
 package ph.buics.rest;
 
+import java.util.List;
+
 public class Training {
 	String title;
 	String location;
 	String date;
+	List<Score> scoreList;
+	
 	
 	public String getTitle() {
 		return title;
